@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Cart
+{% endblock title %}
+
+{% block cart %}
+{% if request.user.is_authenticated %}
+<li><a class="custom-nav-link" href="/cart">Cart ({{ cartitems|length }}) </a></li>
+{% endif %}
+{% endblock cart %}
+
+{% block body %}
+{% for message in messages %}
+<div class="custom-alert">
+  <strong>{{message}}</strong>
+  
+</div>
+{% endfor %}
+
+<h1 class="custom-heading">Cart</h1>
+
+{% for prod, val in cartdict.items %}
+<section id="portfolio" class="portfolio custom-portfolio">
+  <div class="custom-card">
+    <img src="/media/{{ prod.image }}" class="custom-card-img" alt="{{ prod.name }}" />
+    <div class="custom-card-body">
+      <a href="/viewproduct/{{ prod.product_id }}">
+        <h5 class="custom-card-title"><b>{{ prod.product_name }}</b></h5>
+      </a>
+      <h6 class="custom-card-title custom-card-price">
+        Price: <span id="pricepr{{ v.id }}">{{ prod.price }}/-</span>
+      </h6>
+      <div class="custom-card-buttons">
+        <a href="/add/{{ prod.product_id }}" class="custom-button custom-button-add">
+          AddToCart(+) 
+        </a>
+        <span class="custom-card-quantity"><b>{{ val }}</b></span>
+        <a href="/dele/{{ prod.product_id }}" class="custom-button custom-button-remove">
+          Remove(-) 
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endfor %}
+
+{% if cartitems|length == 0 %}
+<h1>No Items in the Cart</h1>
+{% endif %}
+
+<div class="custom-portfolio custom-portfolio-footer">
+  <button class="custom-button custom-button-total">Total = {{ totalprice }}</button>
+  <a href="/checkout" class="custom-button custom-button-checkout">Checkout</a>
+</div>
+{% endblock body %}
+

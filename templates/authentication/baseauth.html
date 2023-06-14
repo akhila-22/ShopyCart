@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>
+    Authentication - 
+    {% block title %}
+      
+    {% endblock title %}
+  </title>
+  <meta content="ecommerce website we deliver in 1hrs" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+ 
+  
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+  <style>
+    
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #fff;
+      z-index: 9999;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    #navbar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+
+    }
+
+    #navbar li {
+      margin-right: 20px;
+    
+    }
+
+    #navbar li:last-child {
+      margin-right: 0;
+    }
+
+    #navbar a {
+      text-decoration: none;
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    
+
+    .nav-link {
+      padding: 10px 0;
+    }
+
+    /* Hero section styles */
+    #hero {
+      background-color: #f8f8f8;
+      padding: 200px 0;
+      text-align: center;
+    }
+
+    .hero-container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="container">
+
+      <h1 class="logo"><a href="/">Shop Cart</a></h1>
+
+      <nav id="navbar">
+        <ul>
+          <li><a class="nav-link" href="/">Home</a></li>
+          <li><a class="nav-link" href="/">About</a></li>
+          <li><a class="nav-link" href="/">Blog</a></li>
+          
+          {% if request.user.is_authenticated %}
+          <li><a href="/auth/logout">Logout</a></li>
+          {% else %}
+          <li><a href="/auth/login">Login</a></li>
+          <li><a href="/auth/signup">Signup</a></li>
+          {% endif %}
+          <li><a class="nav-link bg-dark p-3 m-2" href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container">
+      {% block content %}
+
+      {% endblock content %}
+    </div>
+  </section><!-- End Hero -->
+
+
+</body>
+
+</html>
